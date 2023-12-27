@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dots Flicker Pattern</title>
+  <style>
+  body {
+    background-color: black;
+  }
+  
+  .dot {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #F5F7F8;
+    margin: 20px;
+    cursor: pointer;
+  }
+  
+  .flicker {
+  animation: flickerAnimation 1s infinite;
+}
+
+@keyframes flickerAnimation {
+  0% {
+    background-color: #F5F7F8;
+  }
+  100% {
+    background-color: #F4CE14
+  }
+}
+
+  .row {
+text-align: center;
+}
+
+  </style>
+</head>
+<body>
+  <div id="triangle">
+    <div class="row">
+      <div id="dot1" class="dot"></div>
+    </div>
+    <div class="row">
+      <div id="dot2" class="dot"></div>
+      <div id="dot3" class="dot"></div>
+    </div>
+    <div class="row">
+      <div id="dot4" class="dot"></div>
+      <div id="dot5" class="dot"></div>
+      <div id="dot6" class="dot"></div>
+    </div>
+    <div class="row">
+      <div id="dot7" class="dot"></div>
+      <div id="dot8" class="dot"></div>
+      <div id="dot9" class="dot"></div>
+      <div id="dot10" class="dot"></div>
+    </div>
+    <div class="row">
+      <div id="dot11" class="dot"></div>
+      <div id="dot12" class="dot"></div>
+      <div id="dot13" class="dot"></div>
+      <div id="dot14" class="dot"></div>
+      <div id="dot15" class="dot"></div>
+    </div>
+    <div class="row">
+        <div id="dot16" class="dot"></div>
+        <div id="dot17" class="dot"></div>
+        <div id="dot18" class="dot"></div>
+        <div id="dot19" class="dot"></div>
+        <div id="dot20" class="dot"></div>
+        <div id="dot21" class="dot"></div>
+    </div>
+  </div>
+
+  <script>var 
+    dots = document.querySelectorAll('.dot');
+    var flickerInterval;
+    var patterns = {
+      dot1: [0, 0, 0, 0, 0],
+
+      dot2: [0, 0, 0, 0, 0],
+      dot3: [0, 0, 0, 0, 0],
+
+      dot4: [1, 1, 1, 1, 1],
+      dot5: [1, 0, 1, 0, 0],
+      dot6: [1, 1, 1, 0, 0],
+
+      dot7: [1, 1, 1, 1, 1],
+      dot8: [0, 0, 0, 0, 1],
+      dot9: [0, 0, 0, 0, 1],
+      dot10: [0, 0, 0, 0, 1],
+
+      dot11: [0, 0, 0, 0, 0],
+      dot12: [1, 1, 1, 1, 1],
+      dot13: [0, 0, 0, 0, 1],
+      dot14: [1, 1, 1, 1, 1],
+      dot15: [0, 0, 0, 0, 0],
+
+      dot16: [1,1,1,0,1],
+      dot17: [1,0,1,0,1],
+      dot18: [1,0,1,0,1],
+      dot19: [1,0,1,0,1],
+      dot20: [1,0,1,0,1],
+      dot21: [1,0,1,1,1]
+      
+    };
+    
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        clearInterval(flickerInterval);
+        changeColor(dot);
+      });
+    });
+    
+    flickerInterval = setInterval(flickerDots, 1000); // Check every second
+    
+    function flickerDots() {
+      var currentSecond = Math.floor(Date.now() / 1000) % 8; // Get the current second (0 to 4)
+      dots.forEach(function(dot) {
+        var dotId = dot.id;
+        var pattern = patterns[dotId];
+        var flickerState = pattern[currentSecond];
+        flickerDot(dot, flickerState);
+      });
+    }
+    
+    function flickerDot(dot, flickerState) {
+      if (flickerState === 1) {
+      
+        dot.classList.add('flicker');
+      } else {
+       
+        dot.classList.remove('flicker');
+      }
+      console.log(dot,flickerState,dot.classList)
+    }
+    
+    function changeColor(dot) {
+      dot.style.backgroundColor = 'orange';
+    }
+
+
+    var triangle = document.getElementById('triangle');
+var congratulationsText = document.createElement('div');
+congratulationsText.style.color = 'white';
+congratulationsText.style.textAlign = 'center';
+congratulationsText.style.fontSize = '240px';
+congratulationsText.style.fontFamily = 'Arial, sans-serif';
+congratulationsText.textContent = 'Yay!';
+
+var isStopped = false;
+
+document.addEventListener('keydown', function(event) {
+  if (event.shiftKey && event.code === 'Equal' && !isStopped) {
+    clearInterval(flickerInterval);
+
+    triangle.appendChild(congratulationsText);
+    triangle.classList.add('cross');
+    isStopped = true;
+  }
+});
+
+  </script>
+</body>
+</html>
