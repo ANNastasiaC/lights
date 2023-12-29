@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Word Transformation</title>
+  <style>
+    body {
+      background-color: grey;
+      color: white;
+    }
+    #image {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #hiddenText, #word {
+     
+      text-align:center;
+      font-size:large;
+      font-family: 'Courier New', Courier, monospace;
+      font-size:50px;
+    }
+    p {
+      text-align:center;     
+      font-family: 'Courier New', Courier, monospace;
+      font-size:50px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+  <script>
+    function revealWord() {
+      var word = document.getElementById("word");
+      var hiddenText = document.getElementById("hiddenText");
+
+      word.innerHTML = "yay!";
+      word.classList.remove("hidden");
+    }
+  </script>
+</head>
+<body>
+  <div id="image">
+    <img src="crTerry.png" alt="Your Image">
+  </div>
+  <p>The<span id="hiddenText"> </span>transformation</p>
+  <p><span id="word" class="hidden">yay</span></p>
+
+  <script>
+    var hiddenText = document.getElementById("hiddenText");
+    hiddenText.addEventListener("click", revealWord);
+  </script>
+</body>
+</html>
